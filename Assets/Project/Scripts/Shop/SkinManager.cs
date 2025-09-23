@@ -130,6 +130,11 @@ public class SkinManager : MonoBehaviour
         return skinItems.ContainsKey(skinId) && skinItems[skinId].isEquipped;
     }
     
+    public List<SkinItem> GetOwnedSkins()
+    {
+        return skinItems.Values.Where(s => s.isOwned).ToList();
+    }
+    
     #region Save/Load
     public void SaveSkinData(string skinId, bool isOwned, bool isEquipped)
     {

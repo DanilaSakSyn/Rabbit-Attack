@@ -292,6 +292,8 @@ MonoBehaviour:
   controller: {fileID: 0}
   timerIndicatorPrefab: {fileID: 3633602864535094273, guid: 3377d2a464d4c4c1785e26932edf5239, type: 3}
   uiCanvas: {fileID: 0}
+  timerElapsed: 0
+  isFrozen: 0
 --- !u!61 &6588392709939619851
 BoxCollider2D:
   m_ObjectHideFlags: 0

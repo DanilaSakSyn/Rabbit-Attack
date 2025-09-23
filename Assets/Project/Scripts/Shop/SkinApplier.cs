@@ -53,37 +53,7 @@ public class SkinApplier : MonoBehaviour
     
     public void ApplySkin(SkinItem skinItem)
     {
-        if (skinItem?.skinData == null) return;
-        
-        SkinData skinData = skinItem.skinData;
-        
-        // Применяем спрайт для SpriteRenderer
-        if (spriteRenderer != null)
-        {
-            if (skinData.skinSprites != null && skinData.skinSprites.Length > 0)
-            {
-                spriteRenderer.sprite = skinData.skinSprites[0];
-            }
-            else if (skinData.skinPreview != null)
-            {
-                spriteRenderer.sprite = skinData.skinPreview;
-            }
-        }
-        
-        // Применяем материал для MeshRenderer
-        if (meshRenderer != null && skinData.skinMaterial != null)
-        {
-            meshRenderer.material = skinData.skinMaterial;
-        }
-        
-        // Применяем спрайт для UI Image
-        if (uiImage != null)
-        {
-            if (skinData.skinIcon != null)
-            {
-                uiImage.sprite = skinData.skinIcon;
-            }
-        }
+ 
     }
     
     public void ApplyDefaultSkin()

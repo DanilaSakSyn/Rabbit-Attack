@@ -9,7 +9,6 @@ public class SkinShopItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI skinNameText;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Button purchaseButton;
-    [SerializeField] private Button equipButton;
     [SerializeField] private GameObject ownedIndicator;
     [SerializeField] private GameObject equippedIndicator;
     [SerializeField] private Image currencyIcon;
@@ -29,8 +28,6 @@ public class SkinShopItem : MonoBehaviour
         purchaseButton.onClick.RemoveAllListeners();
         purchaseButton.onClick.AddListener(OnPurchaseClicked);
         
-        equipButton.onClick.RemoveAllListeners();
-        equipButton.onClick.AddListener(OnEquipClicked);
     }
     
     private void UpdateUI()
@@ -51,7 +48,6 @@ public class SkinShopItem : MonoBehaviour
         
         // Настраиваем кнопки
         purchaseButton.gameObject.SetActive(!isOwned);
-        equipButton.gameObject.SetActive(isOwned && !isEquipped);
         
         if (!isOwned)
         {
@@ -67,7 +63,7 @@ public class SkinShopItem : MonoBehaviour
                 currencyIcon.sprite = gemIcon;
             }
             
-            purchaseButton.interactable = canPurchase;
+            // purchaseButton.interactable = canPurchase;
         }
         else
         {
@@ -88,6 +84,7 @@ public class SkinShopItem : MonoBehaviour
         }
         else
         {
+            Debug.Log("adasd");
             shopUI?.ShowInsufficientFundsMessage();
         }
     }

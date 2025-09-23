@@ -62,7 +62,7 @@ public class SkinItem
         if (!isOwned) return;
         
         isEquipped = true;
-        SkinManager.Instance?.EquipSkin(this);
+       // SkinManager.Instance?.EquipSkin(this);
     }
     
     public void Unequip()

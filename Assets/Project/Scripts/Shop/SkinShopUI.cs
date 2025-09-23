@@ -219,12 +219,12 @@ public class SkinShopUI : MonoBehaviour
     
     public void ShowInsufficientFundsMessage()
     {
-        StartCoroutine(ShowMessage("Недостаточно средств!"));
+        StartCoroutine(ShowMessage("Not enough money!"));
     }
     
     private IEnumerator ShowPurchaseSuccessMessage(SkinItem skinItem)
     {
-        string message = $"Скин \"{skinItem.skinData.skinName}\" куплен!";
+        string message = $"You bought!\n \"{skinItem.skinData.skinName}\"";
         yield return ShowMessage(message);
     }
     

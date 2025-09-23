@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 namespace Project.Scripts
 {
-    public class Rabbit : MonoBehaviour, IPointerClickHandler
+    public class Rabbit : MonoBehaviour, IPointerClickHandler, IFreeze
     {
         public CarrotCell targetCell;
         public SpriteRenderer rabbitSpriteRenderer;
         public Sprite rabbitNormalSprite;
         public Sprite rabbitEatSprite;
         public Animator animator;
-public float lifeTime = 1f;
+        public float lifeTime = 1f;
         public Vector3 offcet;
         private bool isClicked = false;
         public RabbitController controller;
@@ -22,7 +22,8 @@ public float lifeTime = 1f;
         private Image timerImage;
         private GameObject timerInstance;
         private float timerDuration = 10f;
-        private float timerElapsed = 0f;
+        public float timerElapsed = 0f;
+        public bool isFrozen = false;
 
         void Start()
         {
@@ -44,7 +45,7 @@ public float lifeTime = 1f;
         {
             if (timerInstance != null)
             {
-                Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position+offcet);
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position + offcet);
                 timerInstance.transform.position = screenPos;
             }
         }
@@ -60,38 +61,61 @@ public float lifeTime = 1f;
             timerElapsed = 0f;
             while (timerElapsed < timerDuration && !isClicked)
             {
+                if (isFrozen)
+                {
+                    yield return null;
+                    continue;
+                }
+
                 timerElapsed += Time.deltaTime;
                 if (timerImage != null)
                     timerImage.fillAmount = 1f - (timerElapsed / timerDuration);
                 yield return null;
             }
-            if (!isClicked)
-            {
-                if (targetCell != null)
-                    targetCell.ShowCarrot(false);
-                if (rabbitSpriteRenderer != null && rabbitEatSprite != null)
-                    rabbitSpriteRenderer.sprite = rabbitEatSprite;
-                yield return new WaitForSeconds(lifeTime);
-                controller.OnRabbitRemoved();
-                targetCell.hasRabbit = false;
-                Destroy(timerInstance);
-                Destroy(gameObject);
-            }
+
+            if (isClicked) yield break;
+            isClicked = true;
+            if (targetCell != null)
+                targetCell.ShowCarrot(false);
+            if (rabbitSpriteRenderer != null && rabbitEatSprite != null)
+                rabbitSpriteRenderer.sprite = rabbitEatSprite;
+            yield return new WaitForSeconds(lifeTime);
+            controller.OnRabbitRemoved();
+            targetCell.hasRabbit = false;
+            Destroy(timerInstance);
+            Destroy(gameObject);
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!isClicked)
             {
-                isClicked = true;
-                if (animator != null)
-                    animator.SetTrigger("Clicked");
-                controller.OnRabbitRemoved();
-                targetCell.hasRabbit = false;
-                
-                Destroy(timerInstance);
-                Destroy(gameObject, 1.3f);
+                StartCoroutine(KickedCoroutine());
             }
+        }
+
+        private IEnumerator KickedCoroutine()
+        {
+            isClicked = true;
+            if (animator != null)
+                animator.SetTrigger("Clicked");
+            controller.OnRabbitRemoved();
+            controller.AddScore();
+            Destroy(timerInstance);
+            yield return new WaitForSeconds(1.3f);
+            targetCell.hasRabbit = false;
+            Destroy(gameObject);
+        }
+
+        public void Freeze()
+        {
+            Debug.Log($"{name} is Freeze");
+            isFrozen = true;
+        }
+
+        public void UnFreeze()
+        {
+            isFrozen = false;
         }
     }
 }
