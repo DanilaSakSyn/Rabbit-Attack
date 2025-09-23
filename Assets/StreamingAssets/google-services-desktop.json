@@ -1,0 +1,31 @@
+{
+  "project_info": {
+    "project_number": "689628700336",
+    "project_id": "rabbit-attack",
+    "storage_bucket": "rabbit-attack.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689628700336:ios:9ee87200bbf6dafe25a575",
+        "android_client_info": {
+          "package_name": "com.nluwswo.ogtazwy"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVVmGmNh4jXJDT5Z1fYxgABYX05AWrL8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

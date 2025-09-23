@@ -3,22 +3,6 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
-        <entry key="$PROJECT_DIR$/Assets/Project/Scripts/AnimatedTextDisplay.cs">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/Assets/Project/Scripts/AnimatedTextDisplay.cs" />
-              <option name="updatedContent" value="using System.Collections;&#10;using UnityEngine;&#10;using TMPro;&#10;&#10;public class AnimatedTextDisplay : MonoBehaviour&#10;{&#10;    public TextMeshProUGUI textElement;&#10;    public float animationDuration = 1f;&#10;    public float maxScale = 1.5f;&#10;&#10;    private Vector3 originalScale;&#10;&#10;    private void Awake()&#10;    {&#10;        if (textElement == null)&#10;        {&#10;            Debug.LogError(&quot;Text element is not assigned.&quot;);&#10;            return;&#10;        }&#10;&#10;        originalScale = textElement.transform.localScale;&#10;    }&#10;&#10;    public void DisplayText(string message)&#10;    {&#10;        if (textElement == null) return;&#10;&#10;        textElement.text = message;&#10;        StopAllCoroutines();&#10;        StartCoroutine(AnimateText());&#10;    }&#10;&#10;    private IEnumerator AnimateText()&#10;    {&#10;        float halfDuration = animationDuration / 2f;&#10;        float timer = 0f;&#10;&#10;        // Scale up&#10;        while (timer &lt; halfDuration)&#10;        {&#10;            timer += Time.deltaTime;&#10;            float scale = Mathf.Lerp(1f, maxScale, timer / halfDuration);&#10;            textElement.transform.localScale = originalScale * scale;&#10;            yield return null;&#10;        }&#10;&#10;        timer = 0f;&#10;&#10;        // Scale down&#10;        while (timer &lt; halfDuration)&#10;        {&#10;            timer += Time.deltaTime;&#10;            float scale = Mathf.Lerp(maxScale, 1f, timer / halfDuration);&#10;            textElement.transform.localScale = originalScale * scale;&#10;            yield return null;&#10;        }&#10;&#10;        textElement.transform.localScale = originalScale;&#10;    }&#10;}" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/Assets/Project/Scripts/LevelManager.cs">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/Assets/Project/Scripts/LevelManager.cs" />
-              <option name="updatedContent" value="using UnityEngine;&#10;&#10;public class LevelManager : MonoBehaviour&#10;{&#10;    private const string LevelKey = &quot;CurrentLevel&quot;;&#10;    private int currentLevel;&#10;&#10;    public AnimatedTextDisplay animatedTextDisplay;&#10;&#10;    private void Start()&#10;    {&#10;        LoadLevel();&#10;        DisplayLevel();&#10;    }&#10;&#10;    public void CompleteLevel()&#10;    {&#10;        currentLevel++;&#10;        SaveLevel();&#10;        DisplayLevel();&#10;    }&#10;&#10;    private void DisplayLevel()&#10;    {&#10;        if (animatedTextDisplay != null)&#10;        {&#10;            animatedTextDisplay.gameObject.SetActive(true);&#10;            animatedTextDisplay.DisplayText($&quot;Level {currentLevel}&quot;);&#10;        }&#10;    }&#10;&#10;    private void SaveLevel()&#10;    {&#10;        PlayerPrefs.SetInt(LevelKey, currentLevel);&#10;        PlayerPrefs.Save();&#10;    }&#10;&#10;    private void LoadLevel()&#10;    {&#10;        currentLevel = PlayerPrefs.GetInt(LevelKey, 1); // Default to level 1 if no data is saved&#10;    }&#10;}" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/Assets/Project/Scripts/Shop/ShopCurrencyDisplay.cs">
           <value>
             <PendingDiffInfo>
@@ -31,6 +15,15 @@
           <value>
             <PendingDiffInfo>
               <option name="filePath" value="$PROJECT_DIR$/Assets/Project/Scripts/Shop/ShopPurchaseHandler.cs" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Assets/Scripts/LoaderView.cs">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/Assets/Scripts/LoaderView.cs" />
+              <option name="originalContent" value="using System.Collections;&#10;// using DG.Tweening;&#10;using UnityEngine;&#10;&#10;public class LoaderView : MonoBehaviour&#10;{&#10;    private Coroutine _loadingCoroutine;&#10;&#10;    private bool _canRotate;&#10;&#10;    private void OnEnable()&#10;    {&#10;        _loadingCoroutine = StartCoroutine(DelayLoading());&#10;    }&#10;&#10;    private void OnDisable()&#10;    {&#10;        StopCoroutine(_loadingCoroutine);&#10;    }&#10;&#10;    private IEnumerator DelayLoading()&#10;    {&#10;        int sec = 20;&#10;&#10;        while (sec-- &gt; 0)&#10;        {&#10;            // Vector3 targetLoadingRotation = new Vector3(0, 0, gameObject.transform.localRotation.eulerAngles.z+350);&#10;            //&#10;            // gameObject.transform.DORotate(targetLoadingRotation, 1f, RotateMode.WorldAxisAdd);&#10;            &#10;            yield return new WaitForSeconds(1.1f);&#10;        }&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="using System.Collections;&#10;// using DG.Tweening;&#10;using UnityEngine;&#10;&#10;public class LoaderView : MonoBehaviour&#10;{&#10;    private Coroutine _loadingCoroutine;&#10;&#10;    private bool _canRotate;&#10;&#10;    private float _rotationSpeed = 100f;&#10;&#10;    private void OnEnable()&#10;    {&#10;        _loadingCoroutine = StartCoroutine(DelayLoading());&#10;    }&#10;&#10;    private void OnDisable()&#10;    {&#10;        StopCoroutine(_loadingCoroutine);&#10;    }&#10;&#10;    private IEnumerator DelayLoading()&#10;    {&#10;        int sec = 20;&#10;&#10;        while (sec-- &gt; 0)&#10;        {&#10;            // Vector3 targetLoadingRotation = new Vector3(0, 0, gameObject.transform.localRotation.eulerAngles.z+350);&#10;            //&#10;            // gameObject.transform.DORotate(targetLoadingRotation, 1f, RotateMode.WorldAxisAdd);&#10;            &#10;            yield return new WaitForSeconds(1.1f);&#10;        }&#10;    }&#10;&#10;    private void Update()&#10;    {&#10;        RotateObject(_rotationSpeed);&#10;    }&#10;&#10;    private void RotateObject(float rotationSpeed)&#10;    {&#10;        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);&#10;    }&#10;}" />
             </PendingDiffInfo>
           </value>
         </entry>
