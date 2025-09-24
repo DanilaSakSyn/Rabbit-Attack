@@ -68,7 +68,7 @@ public static class AddNotificationExtension
             project.SetBuildProperty(extGuid, "PRODUCT_BUNDLE_IDENTIFIER",
                 PlayerSettings.GetApplicationIdentifier(BuildTargetGroup.iOS) + ".notifications");
             project.SetBuildProperty(extGuid, "SWIFT_VERSION", "5.0");
-            project.SetBuildProperty(extGuid, "IPHONEOS_DEPLOYMENT_TARGET", "12.0");
+            project.SetBuildProperty(extGuid, "IPHONEOS_DEPLOYMENT_TARGET", "13.0");
             project.SetBuildProperty(extGuid, "CODE_SIGN_STYLE", "Automatic");
             project.SetBuildProperty(extGuid, "CODE_SIGN_ENTITLEMENTS", relEntitlementsPath);
 
