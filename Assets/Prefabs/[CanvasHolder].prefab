@@ -1231,17 +1231,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8007527105183578331}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86d9fcc33268d4d9985c95531101f3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forcedScreenOrientation: 1
-  endpoint: https://chickeneggcooktimer.com
-  appsflyerDevID: Qaf5LR7YmLd8M78LMitfwT
-  IOS_ID: 6747754113
-  _sleepObjects:
-  - {fileID: 0}
+  forcedScreenOrientation: 4
+  endpoint: https://rabbittattack.com
+  appsflyerDevID: JEtVnpf4RzZFciMk6BEfU3
+  IOS_ID: 6752780761
+  _sleepObjects: []
   loadingScreen: {fileID: 2620323194786471307}
   notificationRequestScreen: {fileID: 4267856706580943156}
   noNetScreen: {fileID: 3722175576839658409}
