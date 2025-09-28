@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         unity-version:
-          - 2022.3.33f1
+          - 6000.2.1f1
         os:
           - ubuntu-latest
         targetPlatform:
@@ -113,7 +113,7 @@ jobs:
       ###################
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '16.3.0'
+          xcode-version: '16.4.0'
 
       - name: Список Xcode targets
         run: |
@@ -147,7 +147,7 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${MATCH_DEPLOY_KEY}"
           find $IOS_BUILD_PATH -type f -name "**.sh" -exec chmod +x {} \;
-          sed -i '' 's/-mno-thumb//g' "$IOS_BUILD_PATH/iOS/Unity-iPhone.xcodeproj/project.pbxproj" || sed -i 's/-mno-thumb//g' "$IOS_BUILD_PATH/iOS/Unity-iPhone.xcodeproj/project.pbxproj"
+          #sed -i '' 's/-mno-thumb//g' "$IOS_BUILD_PATH/iOS/Unity-iPhone.xcodeproj/project.pbxproj" || sed -i 's/-mno-thumb//g' "$IOS_BUILD_PATH/iOS/Unity-iPhone.xcodeproj/project.pbxproj"
           bundle install
           #bundle exec fastlane ios release
           bundle exec fastlane ios beta
